@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Sider from "../static/Sider";
-import Header from "../static/Header";
+import Sider from "../MainStatic/Sider";
+import Header from "../MainStatic/Header";
 
 const Layout = () => {
 	return (
