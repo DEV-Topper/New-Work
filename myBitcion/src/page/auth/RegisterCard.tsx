@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/digbitLogo.png";
+import logo from "../../assets/banner_vector2.png";
 const RegisterCard = () => {
 	return (
 		<div className="w-full h-[94vh] flex items-center justify-center flex-col">

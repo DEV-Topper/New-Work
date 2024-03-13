@@ -9,10 +9,8 @@ const AuthLayout = () => {
 			<div className="w-full flex flex-col items-center">
 				<div className="border-b w-[40%]  " />
 
-				<div className="text-[13px] mt-2">This project is Built </div>
-				<p className="font-medium text-[14px] mt-1">
-					With you in Mind{" "}
-				</p>
+				<div className="text-[13px] mt-2">Bitcoin made easy </div>
+				<p className="font-medium text-[14px] mt-1">Just for you. </p>
 			</div>
 		</div>
 	);

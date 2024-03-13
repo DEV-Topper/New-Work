@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Input from "../../components/MainReUse/Input";
-import logo from "../../assets/digbitLogo.png";
+import logo from "../../assets/banner_vector2.png";
 import Button from "../../components/MainReUse/Button";
 import { useState } from "react";
 

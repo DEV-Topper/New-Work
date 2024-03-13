@@ -7,6 +7,8 @@ import Layout from "../components/layout/Layout";
 import Settings from "../components/settings/Settings";
 import View from "../page/home/View";
 import HeroLayout from "../components/layout/HeroLayout";
+import RegisterCard from "../page/auth/RegisterCard";
+import Token from "../page/auth/Token";
 
 export const Router = createBrowserRouter([
 	{
@@ -34,7 +36,13 @@ export const Router = createBrowserRouter([
 			},
 			{
 				index: true,
-				path: "register",
+				path: "register-message",
+				element: <RegisterCard />,
+			},
+			{
+				index: true,
+				path: "token",
+				element: <Token />,
 			},
 		],
 	},
