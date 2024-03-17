@@ -1,6 +1,7 @@
 import React from "react";
 import vector from "../../assets/banner_vector2.png";
 import StarField from "./StarField";
+import Button from "../../components/reUse/Button";
 
 const Hero = () => {
   return (
@@ -22,14 +23,16 @@ const Hero = () => {
                 The highest paying Bitcoin mining pool and cloud mining provider
                 on the market. Start mining Bitcoin today!
               </p>
-              <div className="flex gap-4 mt-4 items-center">
-                <button className="btn rounded-[40px] bg-gradient-to-r from-[#6d62aa] hover:to-[#6d62aa] hover:from-[#2ab2d2] transition-all duration-300 to-[#2ab2d2] text-white border-none shadow-lg text-[18px] px-5">
-                  WHITE PAPER
-                </button>
+              <div className="flex flex-wrap gap-4 mt-4 items-center justify-center lg:justify-start w-full">
+                <Button
+                  className="w-[300px] lg:w-auto justify-center flex "
+                  text="WHITE PAPER"
+                />
                 <div className="p-1 transition-all duration-300  bg-gradient-to-r  from-[#6d62aa]  to-[#2ab2d2]  bg-white rounded-[40px]">
-                  <button className="btn rounded-[40px] bg-blue-500 text-white border-none text-[18px]  hover:bg-gradient-to-r from-[#6d62aa] to-[#2ab2d2]  ">
-                    BUY TOKEN NOW
-                  </button>
+                  <Button
+                    text="BUY TOKEN NOW"
+                    className="w-[300px] lg:w-auto justify-center flex "
+                  />
                 </div>
               </div>
             </div>

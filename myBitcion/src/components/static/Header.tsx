@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../reUse/Button";
 import { BsMenuButton } from "react-icons/bs";
 import { MdMenu } from "react-icons/md";
+import { Link } from "react-scroll";
 
 const Header = () => {
   const [state, setState] = useState(false);
@@ -28,6 +29,10 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", func);
+
+    return () => {
+      window.removeEventListener("scroll", func);
+    };
   }, []);
 
   return (
@@ -40,34 +45,111 @@ const Header = () => {
         <div className="navbar-start w-auto">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost xl:hidden">
-              <MdMenu />
+              <MdMenu size={20} />
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-gray-100 font-semibold text-blue-700"
             >
               <li>
-                <a>How It Works </a>
+                <Link
+                  smooth={true}
+                  activeStyle={{
+                    color: "lightblue",
+                    fontWeight: "bold",
+                    background: "transparent",
+                    border: "1px solid white",
+                  }}
+                  duration={500}
+                  to="HIW"
+                >
+                  How It Works{" "}
+                </Link>
               </li>
 
               <li>
-                <a>About</a>
+                <Link
+                  smooth={true}
+                  activeClass="active"
+                  spy={true}
+                  duration={500}
+                  activeStyle={{ color: "blue", fontWeight: "bold" }}
+                  to="about"
+                >
+                  About
+                </Link>
               </li>
 
               <li>
-                <a>Token</a>
+                <Link
+                  smooth={true}
+                  activeClass="active"
+                  spy={true}
+                  duration={500}
+                  activeStyle={{
+                    color: "lightblue",
+                    fontWeight: "bold",
+                    background: "transparent",
+                    border: "1px solid white",
+                  }}
+                  to="token"
+                >
+                  Token
+                </Link>
               </li>
 
               <li>
-                <a>Road Map</a>
+                <Link
+                  smooth={true}
+                  activeClass="active"
+                  spy={true}
+                  duration={500}
+                  activeStyle={{
+                    color: "lightblue",
+                    fontWeight: "bold",
+                    background: "transparent",
+                    border: "1px solid white",
+                  }}
+                  to="map"
+                >
+                  Road Map
+                </Link>
               </li>
 
               <li>
-                <a>FAQ</a>
+                <Link
+                  smooth={true}
+                  activeClass="active"
+                  spy={true}
+                  duration={500}
+                  activeStyle={{
+                    color: "lightblue",
+                    fontWeight: "bold",
+                    background: "transparent",
+                    border: "1px solid white",
+                  }}
+                  to="faq"
+                >
+                  FAQ
+                </Link>
               </li>
 
               <li>
-                <a>Contact</a>
+                <Link
+                  smooth={true}
+                  activeClass="active"
+                  spy={true}
+                  duration={500}
+                  activeStyle={{
+                    color: "lightblue",
+                    fontWeight: "bold",
+                    background: "transparent",
+                    border: "1px solid white",
+                  }}
+                  to="contact"
+                >
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
@@ -76,27 +158,109 @@ const Header = () => {
         <div className="navbar-center w-auto hidden xl:flex">
           <ul className="menu menu-horizontal px-1 text-[20px] font-semibold">
             <li>
-              <a>How It Works </a>
+              <Link
+                activeStyle={{
+                  color: "lightblue",
+                  fontWeight: "bold",
+                  background: "transparent",
+                  border: "1px solid white",
+                }}
+                smooth={true}
+                duration={500}
+                spy={true}
+                to="HIW"
+              >
+                How It Works{" "}
+              </Link>
             </li>
 
             <li>
-              <a>About</a>
+              <Link
+                smooth={true}
+                duration={500}
+                activeStyle={{
+                  color: "lightblue",
+                  fontWeight: "bold",
+                  background: "transparent",
+                  border: "1px solid white",
+                }}
+                to="about"
+                spy={true}
+              >
+                About
+              </Link>
             </li>
 
             <li>
-              <a>Token</a>
+              <Link
+                smooth={true}
+                activeClass="active"
+                spy={true}
+                duration={500}
+                activeStyle={{
+                  color: "lightblue",
+                  fontWeight: "bold",
+                  background: "transparent",
+                  border: "1px solid white",
+                }}
+                to="token"
+              >
+                Token
+              </Link>
             </li>
 
             <li>
-              <a>Road Map</a>
+              <Link
+                smooth={true}
+                activeClass="active"
+                spy={true}
+                duration={500}
+                activeStyle={{
+                  color: "lightblue",
+                  fontWeight: "bold",
+                  background: "transparent",
+                  border: "1px solid white",
+                }}
+                to="map"
+              >
+                Road Map
+              </Link>
             </li>
 
             <li>
-              <a>FAQ</a>
+              <Link
+                smooth={true}
+                activeClass="active"
+                spy={true}
+                duration={500}
+                activeStyle={{
+                  color: "lightblue",
+                  fontWeight: "bold",
+                  background: "transparent",
+                  border: "1px solid white",
+                }}
+                to="faq"
+              >
+                FAQ
+              </Link>
             </li>
 
             <li>
-              <a>Contact</a>
+              <Link
+                smooth={true}
+                activeClass="active"
+                duration={500}
+                activeStyle={{
+                  color: "lightblue",
+                  fontWeight: "bold",
+                  background: "transparent",
+                  border: "1px solid white",
+                }}
+                spy={true}
+                to="contact"
+              >
+                Contact
+              </Link>
             </li>
           </ul>
         </div>
