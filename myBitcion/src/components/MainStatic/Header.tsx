@@ -10,7 +10,7 @@ import { useState } from "react";
 const Header = () => {
 	const [search, setSearch] = useState<string>("");
 	return (
-		<div className="h-[50px] border-b w-full flex justify-between items-center z-10 fixed top-0 left-0 right-0">
+		<div className="h-[50px] border-b w-full flex justify-between items-center z-10 fixed top-0 left-0 right-0 bg-white">
 			<div className="flex items-center h-full ml-[270px] ">
 				<h1 className="font-bold ">Dashboard</h1>
 				<div className=" w-[70%] mt-5 flex ml-2">
