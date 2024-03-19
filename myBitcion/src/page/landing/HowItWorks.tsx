@@ -2,6 +2,7 @@ import { FaLock } from "react-icons/fa";
 import Card from "../../components/reUse/Card";
 import { FaPerson } from "react-icons/fa6";
 import { BiCart } from "react-icons/bi";
+import Button from "../../components/reUse/Button";
 
 const HowItWorks = () => {
   const data = [
@@ -32,7 +33,10 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-blue-600 flex justify-center items-center">
+    <div
+      id="HIW"
+      className="min-h-screen bg-blue-600 flex justify-center items-center"
+    >
       <div className="w-[80%] text-white flex gap-4 items-center justify-center flex-wrap lg:flex-nowrap">
         <div className="w-[100%] lg:w-[50%] space-y-8">
           <h1 className="text-[40px] font-bold">How It Works</h1>
@@ -42,12 +46,10 @@ const HowItWorks = () => {
             decentralized network.Mining involves adding bitcoin transaction
             data to Bitcoin’s global public ledger of past transactions.
           </p>
-          <button className="btn rounded-[40px] bg-gradient-to-r from-[#6d62aa] hover:to-[#6d62aa] hover:from-[#2ab2d2] transition-all duration-300 to-[#2ab2d2] text-white border-none shadow-lg text-[18px] px-5 ">
-            DOWNLOAD APP
-          </button>
+          <Button text="DOWNLOAD APP" />
         </div>
         <div className="w-[100%] lg:w-[50%] text-white flex items-center justify-end">
-          <div className="grid lg:grid-cols-2 gap-3 items-center justify-center">
+          <div className="grid lg:grid-cols-2 gap-3 items-center justify-center w-full ">
             {data.map((el, i) => (
               <Card
                 className={i === 1 ? "" : ""}

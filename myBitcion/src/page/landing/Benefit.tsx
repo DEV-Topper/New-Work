@@ -8,7 +8,7 @@ const Benefit = () => {
   return (
     <div className="w-full flex justify-center items-center min-h-[50vh] pt-10 lg:pt-0 bg-blue-600">
       <div className="w-[80%] flex flex-col items-center text-center text-white">
-        <h4 className="font-medium text-[24px] text-blue-800">
+        <h4 className="font-medium text-[24px] text-blue-300">
           WHY CRYPTOKING
         </h4>
         <h1 className="text-[30px] font-bold ">Competitive Benefit</h1>

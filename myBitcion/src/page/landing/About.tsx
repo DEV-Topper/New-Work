@@ -1,9 +1,16 @@
 import about from "../../assets/about_img.png";
 import Button from "../../components/reUse/Button";
+import btc from "../../assets/SL-0212121-40670-68-removebg-preview.png";
 
 const About = () => {
   return (
-    <div className="min-h-[80vh] bg-blue-600 w-full flex justify-center items-center">
+    <div
+      id="about"
+      style={{
+        backgroundImage: `url(${btc})`,
+      }}
+      className="min-h-[80vh] bg-blue-600 w-full flex justify-center bg-center bg-no-repeat  items-center"
+    >
       <div className="w-[80%] text-white flex flex-wrap">
         <div className="w-full lg:w-1/2">
           <img src={about} alt="" />

@@ -28,9 +28,11 @@ const StarField: React.FC = () => {
 
       // Push stars to cover the entire height of the canvas
       for (let i = 0; i < numberOfStars; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
         stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x,
+          y,
           radius: Math.random() * 1 + 1,
           vx: Math.floor(Math.random() * 50) - 25,
           vy: Math.floor(Math.random() * 50) - 25,
