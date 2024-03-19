@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import BitcoinModel from "../model/BitcoinModel";
-import { sendToken } from "../utils/email";
+import { verifiedEmail } from "../utils/email";
 import { HTTP } from "../utils/enums";
 import jwt from "jsonwebtoken";
+import { log } from "console";
 
 export const createUser = async (
 	req: Request,
@@ -14,6 +15,7 @@ export const createUser = async (
 		const { email, password, userName } = req.body;
 		const salt = await bcrypt.genSalt(10);
 
+		log(email, password, userName);
 		const hashed = await bcrypt.hash(password, salt);
 
 		const token = crypto.randomBytes(4).toString("hex");
@@ -25,16 +27,16 @@ export const createUser = async (
 			token,
 			// status: userName,
 		});
-		await sendToken(user);
+		await verifiedEmail(user);
 
 		return res.status(HTTP.CREATED).json({
 			message: "This user has successfully been created.",
 			data: user,
 		});
-	} catch (error) {
+	} catch (error: any) {
 		return res.status(HTTP.BAD).json({
 			message: "Sorry!! There was an error, User not created..",
-			data: error,
+			data: error?.message,
 		});
 	}
 };

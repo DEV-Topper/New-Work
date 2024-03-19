@@ -38,6 +38,7 @@ const SettingScreen: FC = () => {
 			{/* <LittleHeader name={document.title} /> */}
 			<div className="w-full m-auto py-8 my-4 flex gap-24 max-lg:block max-md:pt-1">
 				{/* profile Account Detail */}
+
 				<div>
 					<div className="font-bold text-[30px] text-blue-950 ">
 						Main Settings Page

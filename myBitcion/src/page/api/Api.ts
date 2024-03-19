@@ -6,7 +6,9 @@ const URL2: string = "http://localhost:2244";
 export const registerUser = async (data: any) => {
 	try {
 		return await axios
-			.post(`${URL}/register-account`, { data })
+			.post(`${URL}/register-account`, data, {
+				withCredentials: false,
+			})
 			.then((res: any) => {
 				return res?.data;
 			});

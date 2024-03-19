@@ -4,7 +4,6 @@ import Input from "../../components/MainReUse/Input";
 import Button from "../../components/MainReUse/Button";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { registerUser } from "../api/Api";
@@ -12,153 +11,65 @@ import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
 const Register = () => {
+	const schema = yup.object({
+		userName: yup.string().required(),
+		email: yup.string().required(),
+		password: yup.string().min(6).required(),
+	});
 	const navigate = useNavigate();
+
+	const {
+		formState: { errors },
+		handleSubmit,
+		register,
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
 
 	const [userName, setUserName] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const handleSubmit = (e: any) => {
+	const onHandleSubmit = (e: any) => {
 		e.preventDefault();
 		setLoading(true);
 		if (email !== "") {
-			registerUser(email).then((res: any) => {
-				console.log(res);
-				if (res.status === 201) {
-					setLoading(false);
-					navigate("/auth/register-message");
-				} else {
-					setLoading(false);
-					toast.error(
-						`${
-							res?.response?.data?.data.includes("duplicate")
-								? "Email has Already been used before!"
-								: res?.response?.data?.mwssage
-						}`
-					);
-				}
-			});
+			// registerUser({
+			// 	email,
+			// 	password,
+			// 	userName,
+			// }).then((res: any) => {
+			console.log(email);
+			if (email) {
+				setLoading(false);
+				navigate("/auth/register-message");
+				console.log(email);
+			} else {
+				alert("email is found");
+				// setLoading(false);
+				// toast.error(
+				// 	`${
+				// 		email
+				// 			? "Email has Already been used before!"
+				// 			: email
+				// 	}`
+				// );
+			}
+			// });
+		} else {
+			alert("function not working");
 		}
 	};
 
-	// const schema = yup.object({
-	// 	userName: yup.string().required(),
-	// 	email: yup.string().required(),
-	// 	password: yup.string().min(6).required(),
-	// });
+	const submit = handleSubmit((data) => {
+		console.log(data);
 
-	// const navigate = useNavigate();
-
-	// const {
-	// 	formState: { errors },
-	// 	handleSubmit,
-	// 	register,
-	// } = useForm({
-	// 	resolver: yupResolver(schema),
-	// });
-
-	// const onHandleSubmit = handleSubmit((data) => {
-	// 	console.log(data);
-
-	// 	registerUser(data).then((res) => {
-	// 		console.log(res);
-	// 		navigate("/auth/register-message");
-	// 	});
-	// });
-
-	// const [loading, setLoading] = useState<boolean>(false);
-
-	// const schema = yup.object({
-	// 	userName: yup.string().required(),
-	// 	email: yup.string().required(),
-	// 	password: yup
-	// 		.string()
-	// 		.min(6)
-	// 		.matches(
-	// 			/[A-Z]/,
-	// 			"Password must contain at least one uppercase letter"
-	// 		)
-	// 		.matches(
-	// 			/[a-z]/,
-	// 			"Password must contain at least one lowercase"
-	// 		)
-	// 		.required(),
-	// });
-
-	// const navigate = useNavigate();
-
-	// const {
-	// 	formState: { errors },
-	// 	handleSubmit,
-	// 	register,
-	// } = useForm({
-	// 	resolver: yupResolver(schema),
-	// });
-
-	// const onHandleSubmit = handleSubmit((data) => {
-	// 	console.log(data);
-
-	// 	registerUser(data).then((res) => {
-	// 		console.log(res);
-	// 		navigate("/auth/register-message");
-	// 	});
-	// });
-
-	// const onHandleSubmit = (e: any) => {
-	// 	e.preventDefault();
-	// 	setLoading(true);
-
-	// 	if (email !== "" && userName !== "" && password !== "") {
-	// 		registerUser(email && userName && password).then((res) => {
-	// 			console.log(res);
-
-	// 			if (res.status === 201) {
-	// 				setLoading(false);
-	// 				navigate("/auth/register-message");
-	// 			} else {
-	// 				setLoading(false);
-	// 				toast.error(
-	// 					`${
-	// 						res?.response?.data?.data.includes("duplicate")
-	// 							? "Email has Already been used before"
-	// 							: res?.response?.data?.mwssage
-	// 					}`
-	// 				);
-	// 			}
-	// 		});
-	// 	}
-	// };
-
-	// const navigate = useNavigate();
-
-	// const [email, setEmail] = useState<string>("");
-	// // const [password, setPassword] = useState<string>("");
-	// const [loading, setLoading] = useState<boolean>(false);
-
-	// const handleSubmit = (e: any) => {
-	// 	e.preventDefault();
-	// 	setLoading(true);
-	// 	if (email !== "") {
-	// 		registerUser(email).then((res) => {
-	// 			console.log(res);
-	// 			if (res.status === 201) {
-	// 				setLoading(false);
-	// 				navigate("/auth/register-message");
-	// 			} else {
-	// 				setLoading(false);
-	// 				toast.error(
-	// 					`${
-	// 						res?.response?.data?.data.includes("duplicate")
-	// 							? "Email has Already been used before!"
-	// 							: res?.response?.data?.mwssage
-	// 					}`
-	// 				);
-	// 			}
-	// 		});
-	// 	}
-	// };
-
+		registerUser(data).then((res) => {
+			console.log(res);
+			navigate("/auth/register-message");
+		});
+	});
 	return (
 		<div className="w-full h-[91vh] flex flex-col justify-center items-center">
 			<div className="mb-10 text-center flex items-center w-full flex-col">
@@ -175,7 +86,7 @@ const Register = () => {
 			</div>
 			<form
 				className="rounded-md bg-white min-h-[300px] w-[80%] md:w-[500px] border p-4"
-				onSubmit={handleSubmit}
+				onSubmit={onHandleSubmit}
 			>
 				<Input
 					placeholder="UserName"
@@ -183,7 +94,7 @@ const Register = () => {
 					type="name"
 					value={userName}
 					required
-					// {...register("userName")}
+					{...register("userName")}
 					onChange={(e: any) => {
 						setUserName(e.target.value);
 					}}
@@ -194,7 +105,7 @@ const Register = () => {
 					type="email"
 					value={email}
 					required
-					// {...register("email")}
+					{...register("email")}
 					onChange={(e: any) => {
 						setEmail(e.target.value);
 					}}
@@ -208,7 +119,7 @@ const Register = () => {
 						show
 						value={password}
 						required
-						// {...register("password")}
+						{...register("password")}
 						onChange={(e: any) => {
 							setPassword(e.target.value);
 						}}
@@ -230,7 +141,7 @@ const Register = () => {
 								/>
 							)
 						}
-						onClick={handleSubmit}
+						onClick={onHandleSubmit}
 					/>
 				</div>
 			</form>

@@ -11,7 +11,7 @@ import { handleError } from "./error/handleError";
 
 export const mainApp = (app: Application) => {
 	try {
-		app.use("/api/v1/", router);
+		app.use("/api/v1", router);
 
 		app.get("/", (req: Request, res: Response) => {
 			try {
