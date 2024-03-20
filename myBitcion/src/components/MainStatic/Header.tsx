@@ -88,10 +88,3 @@ const Header = () => {
 };
 
 export default Header;
-
-{
-  /* <input
-	className="bg-transparent border outline-none ml-3 px-2 w-[30%] h-[40px] rounded-md"
-	type="search"
-/>; */
-}

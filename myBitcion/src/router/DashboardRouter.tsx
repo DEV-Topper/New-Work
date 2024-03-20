@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 
-import View from "../page/home/View";
+import View from "../page/DashboardHome/View";
 import Settings from "../components/settings/Settings";
 import WalletScreen from "../page/DashboardHome/WalletScreen";
 import TransactionScreen from "../page/DashboardHome/TransactionScreen";

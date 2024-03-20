@@ -13,7 +13,7 @@ import { MdReport } from "react-icons/md";
 
 const Sider = () => {
 	return (
-		<div className="overflow-y-auto min-h-[100vh] w-full border-r bg-[#161326] text-white flex flex-col ">
+		<div className="overflow-y-auto min-h-[100vh] w-full border-r bg-blue-100 text-white flex flex-col ">
 			<div className="w-full flex px-2 mt-6 ">
 				<div className=" w-16 h-16 object-cover flex border rounded-full items-center justify-center ">
 					<img
@@ -29,43 +29,16 @@ const Sider = () => {
 				</div>
 			</div>
 
-			{/* top box */}
-
-			{/* top box */}
-			{/* <div className="mt-16 px-2 text-center flex flex-col border mx-2 rounded-md py-4 ">
-				<div className="mb-4 text-[13px] font-medium ">
-					Encourage Parents to Purchase Learning Materials for thier
-					child by having more items in your Library Store{" "}
-				</div>
-				{/* <div className="flex w-full justify-center">
-					{/* <NavLink to="upgrade"> */}
-
-			{/* <Button
-              name="Add to Store"
-              className="bg-black text-white border-none font-medium py-4 px-9 leading-tight"
-              onClick={() => {
-                handleDisplayStaff();
-              }}
-            /> */}
-
-			{/* </NavLink> */}
-			{/* </div> */}
-			{/* </div> */}
-
-			{/* Nav Links */}
-
-			{/* Settings */}
 			<div className="mt-10 px-2 flex flex-col h-[90%]">
 				<NavLink
 					to="/dashboard"
 					className={({ isActive }) =>
 						isActive
-							? "duration-500 transition-all p-2 rounded-sm bg-blue-200 text-black cursor-pointer font-medium my-[3px] flex items-center justify-between "
-							: "duration-500 transition-all p-2 rounded-sm hover:bg-blue-200 hover:text-black cursor-pointer font-medium my-[3px] flex items-center justify-between "
+							? "duration-500 transition-all p-2 rounded-sm bg-blue-200 text-blue-950 cursor-pointer font-medium my-[3px] flex items-center justify-between "
+							: "duration-500 transition-all p-2 rounded-sm hover:bg-blue-950 hover:text-black cursor-pointer font-medium my-[3px] flex items-center justify-between "
 					}
 				>
 					Dashboard
-					{/* <MdQueryStats /> */}
 					<MdDashboard />
 				</NavLink>
 				<NavLink
