@@ -28,7 +28,7 @@ const Header = () => {
     setMenu(!menu);
   };
   return (
-    <div className="h-[50px] border-b w-full flex justify-center items-center z-10 fixed top-0 left-0 right-0">
+    <div className="h-[50px] border-b w-full flex justify-center items-center z-10 fixed top-0 left-0 right-0 bg-white">
       <div className="w-full relative flex justify-between items-center">
         <div className="flex items-center h-full md:ml-[270px] ">
           <h1 className="hidden md:block font-bold ">Dashboard</h1>

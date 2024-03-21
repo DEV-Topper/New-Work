@@ -15,7 +15,7 @@ const MobileScreen = () => {
   return (
     <div>
       <div className=" w-[240px]">
-        <div className="overflow-y-auto min-h-[100vh] w-full border-r bg-[#161326] text-white flex flex-col ">
+        <div className="overflow-y-auto min-h-[100vh] w-full border-r bg-blue-950 text-white flex flex-col ">
           <div className="w-full flex px-2 mt-6 ">
             <div className=" w-16 h-8 object-cover flex items-center justify-center">
               <div className="flex ml-64">
@@ -114,12 +114,13 @@ const MobileScreen = () => {
               Settings
               <MdSettings />
             </NavLink>
+            <div className="flex-1" />
             <NavLink
               to=""
               className={({ isActive }) =>
                 isActive
                   ? "duration-500 transition-all p-2 rounded-sm bg-blue-200 text-black cursor-pointer font-medium my-[4px] flex items-center justify-between mt-20"
-                  : "duration-500 transition-all p-2 rounded-sm  flex items-center justify-between hover:bg-blue-200 hover:text-black cursor-pointer font-medium my-[4px] mt-20"
+                  : "duration-500 transition-all p-2 rounded-sm  flex items-center justify-between hover:bg-blue-200 hover:text-black cursor-pointer font-medium my-[4px]"
               }
             >
               LogOut
