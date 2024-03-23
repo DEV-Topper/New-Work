@@ -157,7 +157,7 @@ const Header = () => {
 							</li>
 						</ul>
 					</div>
-					<a className="btn btn-ghost text-[25px]">cryptoKING</a>
+					<a className="btn btn-ghost text-[25px]">CoinTradeX</a>
 				</div>
 				<div className="navbar-center w-auto hidden xl:flex">
 					<ul className="menu menu-horizontal px-1 text-[20px] font-semibold">

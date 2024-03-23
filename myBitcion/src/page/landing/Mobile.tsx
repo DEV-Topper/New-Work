@@ -16,22 +16,27 @@ const Mobile = () => {
 				</div>
 				<div className="w-full lg:w-1/2">
 					<h2 className="text-blue-300 font-semibold text-[23px]">
-						CRYPTOKING APP
+						COINTRADEX APP
 					</h2>
 					<h1 className="text-[35px] mb-5 font-bold">
-						Download Mobile App
+						Coming Soon: Download Mobile App
 					</h1>
 					<p className="mt-5 text-[18px]">
-						The Cryptoking very own app is available to download for
-						your iPhone or Android™ device! … Now Download the new
-						mobile app, and get the most out of your membership with
-						special tools designed to enhance your experience.
-						Download the Cryptoking new mobile app, and
+						Prepare for an enhanced trading experience with the
+						upcoming CoinTradeX mobile app! Designed to empower your
+						trading journey, our app will soon be available for
+						download on both iPhone and Android™ devices. Stay tuned
+						for its release, where you'll gain access to exclusive
+						tools tailored to optimize your trading strategies and
+						maximize your membership benefits. Get ready to trade
+						smarter and more conveniently with the CoinTradeX mobile
+						app.
 					</p>
+
 					<p className="my-5 text-[18px]">
-						Download the Cryptoking new mobile app, and get the most
-						out of your membership with special tools designed to
-						enhance your experience.
+						Get ready to elevate your trading journey with CoinTradeX
+						- the future of cryptocurrency trading is just around the
+						corner.
 					</p>
 					<div className="flex gap-5 justify-center lg:justify-start flex-wrap">
 						<Button
