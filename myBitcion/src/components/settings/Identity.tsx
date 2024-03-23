@@ -18,7 +18,11 @@ const Identity = () => {
         <div className="py-4 px-3 grid grid-row-3 gap-4">
           <div className=" flex gap-2">
             <div className="flex gap-2">
-              <input type="checkbox" className="toggle toggle-success" />
+              <input
+                type="checkbox"
+                className="toggle toggle-success"
+                checked
+              />
               <PiGoogleLogoLight className="p-1 w-[23px] bg-white h-[23px] text-thin rounded" />
             </div>
             <div>
@@ -30,7 +34,11 @@ const Identity = () => {
           </div>
           <div className=" flex gap-2">
             <div className="flex gap-2">
-              <input type="checkbox" className="toggle toggle-success" />
+              <input
+                type="checkbox"
+                className="toggle toggle-success"
+                checked
+              />
               <BiMessageDetail
                 size={20}
                 className=" w-[23px] p-1 bg-white h-[23px] text-thin rounded"
@@ -45,7 +53,11 @@ const Identity = () => {
           </div>
           <div className=" flex gap-2">
             <div className="flex gap-2">
-              <input type="checkbox" className="toggle toggle-success" />
+              <input
+                type="checkbox"
+                className="toggle toggle-success"
+                checked
+              />
               <MdOutlineAttachEmail className="p-1 w-[23px] bg-white h-[23px] text-thin rounded" />
             </div>
             <div>
@@ -157,7 +169,11 @@ const Identity = () => {
             <div className="py-4 px-3 grid grid-row-3 gap-2">
               <div className=" flex gap-2">
                 <div className="flex gap-2">
-                  <input type="checkbox" className="toggle toggle-success" />
+                  <input
+                    type="checkbox"
+                    className="toggle toggle-success"
+                    checked
+                  />
                   <BiMessageDetail className="p-1 w-[23px] bg-white h-[23px] text-thin rounded" />
                 </div>
                 <div>
