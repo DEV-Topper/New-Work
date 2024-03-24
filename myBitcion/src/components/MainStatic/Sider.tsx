@@ -10,7 +10,7 @@ import { MdReport } from "react-icons/md";
 
 const Sider = () => {
   return (
-    <div className="overflow-y-auto min-h-[100vh] w-full border-r bg-slate-950 text-white flex flex-col ">
+    <div className="overflow-y-auto min-h-[100vh] w-full border-r bg-blue-950 text-white flex flex-col ">
       <div className="w-full flex px-2 mt-6 ">
         <div className=" w-16 h-16 object-cover flex border rounded-full items-center justify-center ">
           <img
@@ -31,8 +31,8 @@ const Sider = () => {
           to="/dashboard"
           className={({ isActive }) =>
             isActive
-              ? "duration-500 transition-all p-2 rounded-sm bg-blue-200 text-blue-950 cursor-pointer font-medium my-[3px] flex items-center justify-between "
-              : "duration-500 transition-all p-2 rounded-sm hover:bg-blue-950 hover:text-black cursor-pointer font-medium my-[3px] flex items-center justify-between "
+              ? "duration-500 transition-all p-2 rounded-sm bg-blue-200 text-black cursor-pointer font-medium my-[3px] flex items-center justify-between "
+              : "duration-500  transition-all p-2 rounded-sm hover:bg-blue-200 hover:text-black cursor-pointer font-medium my-[3px] flex items-center justify-between "
           }
         >
           Dashboard
