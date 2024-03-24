@@ -1,12 +1,12 @@
 import { Router } from "express";
 import {
-	VerifyUser,
-	createUser,
-	getAllUsers,
-	getCookieUser,
-	logOutUser,
-	signInUser,
-} from "../controller/bitcoinController";
+  VerifyUser,
+  createUser,
+  getAllUsers,
+  getCookieUser,
+  logOutUser,
+  signInUser,
+} from "../controller/userController";
 
 const router: Router = Router();
 
