@@ -65,7 +65,7 @@ export const verifiedEmail = async (user: any) => {
     const myPath = path.join(__dirname, "../views/index.ejs");
     const html = await ejs.renderFile(myPath, {
       link: devURL,
-      tokenCode: user?.enrollmentID,
+      tokenCode: user?.token,
       userName: user?.userName,
     });
 
