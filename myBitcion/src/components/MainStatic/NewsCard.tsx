@@ -16,7 +16,7 @@ const NewsCard: React.FC<NewsItem> = ({
 		const imgElement = document.createElement("div");
 		imgElement.innerHTML = htmlContent;
 		const img = imgElement.querySelector("img");
-		return img ? img.src : undefined;
+		return img && img.src !== title ? img.src : undefined;
 	};
 
 	// Extract image URL

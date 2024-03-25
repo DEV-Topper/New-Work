@@ -30,7 +30,7 @@ async function createCryptoChart(): Promise<void> {
 							label: "Bitcoin Price (USD)",
 							data: prices,
 							fill: false,
-							borderColor: "red",
+							borderColor: "blue",
 							tension: 0.1,
 						},
 					],
@@ -89,6 +89,8 @@ interface NewsItem {
 }
 
 const CryptoChart: React.FC = () => {
+	document.title = "Dashboard Screen";
+
 	const [news, setNews] = useState<NewsItem[]>([]);
 
 	useEffect(() => {
@@ -156,7 +158,7 @@ const CryptoChart: React.FC = () => {
 							className={`${bgColors[index % bgColors.length]} ${
 								textColors[index % textColors.length]
 							} justify-center items-center py-2 flex rounded-md border ${
-								index === 1 || index == 2 ? "h-[90%]" : "h-full"
+								index === 1 || index == 2 ? "h-[90%]" : "h-[100%]"
 							}`}
 						>
 							<div className="w-[90%]">
