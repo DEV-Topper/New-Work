@@ -5,7 +5,7 @@ import RouterScreen from "./router/RouterScreen";
 const App = () => {
 	return (
 		<div>
-			<RouterProvider router={Router} />
+			<RouterScreen />
 		</div>
 	);
 };
