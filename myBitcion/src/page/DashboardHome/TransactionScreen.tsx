@@ -10,6 +10,8 @@ import pix3 from "../../assets/EthereumClassic.png";
 import { TbArrowsDownUp } from "react-icons/tb";
 
 const TransactionScreen = () => {
+	document.title = "Transaction Screen";
+
 	return (
 		<div>
 			<div className="flex justify-between items-center">

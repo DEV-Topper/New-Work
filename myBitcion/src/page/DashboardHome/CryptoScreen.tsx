@@ -1,4 +1,6 @@
 const CryptoScreen = () => {
+	document.title = "Crypto Screen";
+
 	return <div>CryptoScreen</div>;
 };
 

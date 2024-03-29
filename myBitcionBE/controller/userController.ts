@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import BitcoinModel from "../model/BitcoinModel";
+import userModel from "../model/userModel";
 import { verifiedEmail } from "../utils/email";
 import { HTTP } from "../utils/enums";
 import jwt from "jsonwebtoken";
 import { log } from "console";
+import { error } from "console";
 
 export const createUser = async (
 	req: Request,
@@ -15,28 +16,28 @@ export const createUser = async (
 		const { email, password, userName } = req.body;
 		const salt = await bcrypt.genSalt(10);
 
-		log(email, password, userName);
 		const hashed = await bcrypt.hash(password, salt);
 
 		const token = crypto.randomBytes(4).toString("hex");
 
-		const user = await BitcoinModel.create({
+		const user = await userModel.create({
 			userName,
 			email,
 			password: hashed,
 			token,
-			// status: userName,
 		});
-		await verifiedEmail(user);
 
+		await verifiedEmail(user);
 		return res.status(HTTP.CREATED).json({
-			message: "This user has successfully been created.",
+			message: "Accountcreated successfully.",
 			data: user,
+			status: 201,
 		});
 	} catch (error: any) {
 		return res.status(HTTP.BAD).json({
 			message: "Sorry!! There was an error, User not created..",
 			data: error?.message,
+			status: 404,
 		});
 	}
 };
@@ -47,10 +48,10 @@ export const VerifyUser = async (
 ): Promise<Response> => {
 	try {
 		const { token } = req.body;
-		const user = await BitcoinModel.findOne({ token });
+		const user = await userModel.findOne({ token });
 
 		if (user) {
-			const updatedUser = await BitcoinModel.findByIdAndUpdate(
+			const updatedUser = await userModel.findByIdAndUpdate(
 				user._id,
 				{ token: "", verify: true },
 				{ new: true }
@@ -61,17 +62,20 @@ export const VerifyUser = async (
 			return res.status(HTTP.CREATED).json({
 				message: "This user has succeddfully been verified",
 				data: user,
+				status: 201,
 			});
 		} else {
 			return res.status(HTTP.BAD).json({
 				message:
 					"Sorry!! This token has already been used by you.. Or You are not registered to this platform.",
+				status: 404,
 			});
 		}
 	} catch (error) {
 		return res.status(HTTP.BAD).json({
-			message: "Sorry!! There was an error, User not created..",
+			message: "Sorry!! T here was an error, User not created..",
 			data: error,
+			status: 404,
 		});
 	}
 };
@@ -83,7 +87,7 @@ export const signInUser = async (
 	try {
 		const { password, email } = req.body;
 
-		const user = await BitcoinModel.findOne({ email });
+		const user = await userModel.findOne({ email });
 
 		if (user) {
 			const checkCode = await bcrypt.compare(password, user.password);
@@ -98,31 +102,37 @@ export const signInUser = async (
 						}
 					);
 
+					req.session.isAuth = true;
 					req.session.data = user._id;
 
 					return res.status(HTTP.CREATED).json({
 						message: "This user has successfully been logged-in",
 						data: encrypted,
+						status: 201,
 					});
 				} else {
 					return res.status(HTTP.BAD).json({
 						message: "Sorry!! Verify your account.",
+						status: 404,
 					});
 				}
 			} else {
 				return res.status(HTTP.BAD).json({
 					message: "Sorry!! Password is incorrect.",
+					status: 404,
 				});
 			}
 		} else {
 			return res.status(HTTP.BAD).json({
 				message: "Sorry!! Email doesn't exist.",
+				status: 404,
 			});
 		}
 	} catch (error) {
 		return res.status(HTTP.BAD).json({
 			message:
 				"Sorry!! User not created. There was an error with this request.",
+			status: 404,
 		});
 	}
 };
@@ -132,7 +142,7 @@ export const getAllUsers = async (
 	res: Response
 ): Promise<Response> => {
 	try {
-		const getUsers = await BitcoinModel.find();
+		const getUsers = await userModel.find();
 
 		return res.status(HTTP.OK).json({
 			message: "Viewing all users",
@@ -152,7 +162,7 @@ export const logOutUser = async (
 	res: Response
 ): Promise<Response> => {
 	try {
-		res.cookie("peter", {
+		res.cookie("aydee", {
 			maxAge: 0,
 			secure: false,
 			sameSite: "lax",

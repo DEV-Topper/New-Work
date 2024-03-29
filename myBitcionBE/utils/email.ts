@@ -5,13 +5,13 @@ import ejs from "ejs";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
 // import schoolModel from "../model/schoolModel";
-import bitcoinModel from "../model/BitcoinModel";
+import bitcoinModel from "../model/userModel";
 env.config();
 
-const GOOGLE_ID = process.env.GOOGLE_ID;
-const GOOGLE_SECRET = process.env.GOOGLE_SECRET;
-const GOOGLE_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL;
-const GOOGLE_REFRESH = process.env.GOOGLE_REFRESH;
+const GOOGLE_ID = process.env.GOOGLE_ID!;
+const GOOGLE_SECRET = process.env.GOOGLE_SECRET!;
+const GOOGLE_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL!;
+const GOOGLE_REFRESH = process.env.GOOGLE_REFRESH!;
 
 const oAuth = new google.auth.OAuth2(
 	GOOGLE_ID,
@@ -31,7 +31,7 @@ export const verifiedEmail = async (user: any) => {
 			service: "gmail",
 			auth: {
 				type: "OAuth2",
-				user: "codelabbest@gmail.com",
+				user: "abbeyrufai234@gmail.com",
 				clientSecret: GOOGLE_SECRET,
 				clientId: GOOGLE_ID,
 				refreshToken: GOOGLE_REFRESH,
@@ -41,8 +41,8 @@ export const verifiedEmail = async (user: any) => {
 
 		const token = jwt.sign(
 			{
-				id: user._id,
-				email: user.email,
+				id: user?._id,
+				email: user?.email,
 			},
 			"secretCode",
 			{
@@ -55,8 +55,8 @@ export const verifiedEmail = async (user: any) => {
 				user._id
 			);
 
-			if (!getBitcionUser.verify) {
-				await bitcoinModel.findByIdAndDelete(getBitcionUser._id);
+			if (!getBitcionUser?.verify) {
+				await bitcoinModel.findByIdAndDelete(getBitcionUser?._id);
 			}
 			clearTimeout(timer);
 		}, 5 * 60 * 1000);
@@ -67,19 +67,28 @@ export const verifiedEmail = async (user: any) => {
 		const myPath = path.join(__dirname, "../views/index.ejs");
 		const html = await ejs.renderFile(myPath, {
 			link: devURL,
-			tokenCode: user?.enrollmentID,
+			tokenCode: user?.token,
 			userName: user?.userName,
 		});
 
 		const mailerOption = {
-			from: "schoolProject❤️⛑️🚑 <codelabbest@gmail.com>",
+			from: "CoinTradeX❤️⛑️🚑 <codelabbest@gmail.com>",
 			to: user.email,
 			subject: "Account Verification",
 			html,
 		};
 
-		await transporter.sendMail(mailerOption);
+		await transporter
+			.sendMail(mailerOption)
+			.then((res: any) => {
+				console.log("Sent");
+				return res;
+			})
+			.catch((err: any) => {
+				console.error(err);
+				return err;
+			});
 	} catch (error) {
-		console.error();
+		console.error(error);
 	}
 };
