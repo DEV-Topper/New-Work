@@ -92,7 +92,7 @@ const CryptoChart: React.FC = () => {
           {data.map((crypto, index) => (
             <div
               key={index}
-              className=" bg-green-500  justify-center items-center py-2 flex rounded-md"
+              className=" border bg-green-500 py-2 flex rounded-md"
             >
               <div className="w-[200px]">
                 <div className="flex items-center mb-3">
