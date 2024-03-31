@@ -124,7 +124,11 @@ const Identity = () => {
             </div>
             <div className=" flex gap-2 mt-2">
               <p className=" font-bold text-sm">Whitelisted On</p>
-              <input type="checkbox" className="toggle toggle-success" />
+              <input
+                type="checkbox"
+                className="toggle toggle-success"
+                checked
+              />
             </div>
           </div>
         </div>
@@ -143,7 +147,11 @@ const Identity = () => {
             <div className="py-4 px-3 grid grid-row-3 gap-2">
               <div className=" flex gap-2">
                 <div className="flex gap-2">
-                  <input type="checkbox" className="toggle toggle-success" />
+                  <input
+                    type="checkbox"
+                    className="toggle toggle-success"
+                    checked
+                  />
                   <FcBusinessman className="p-1 w-[23px] bg-white h-[23px] text-thin rounded" />
                 </div>
                 <div>

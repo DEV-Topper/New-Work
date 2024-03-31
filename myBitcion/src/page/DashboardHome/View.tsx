@@ -148,6 +148,7 @@ const CryptoChart: React.FC = () => {
 		"bg-black",
 	];
 
+
 	return (
 		<div>
 			<div className=" w-full h-screen grid grid-cols-1 lg:grid-cols-2 gap-4">

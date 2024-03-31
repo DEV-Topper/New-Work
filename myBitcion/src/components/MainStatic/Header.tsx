@@ -31,14 +31,14 @@ const Header = () => {
     <div className="h-[50px] border-b w-full flex justify-center items-center z-10 fixed top-0 left-0 right-0 bg-white">
       <div className="w-full relative flex justify-between items-center">
         <div className="flex items-center h-full md:ml-[270px] ">
-          <h1 className="hidden md:block font-bold ">Dashboard</h1>
+          <h1 className="hidden lg:block font-bold ">Dashboard</h1>
           <div
             className="block md:hidden mt-1 ml-2 font-bold cursor-pointer transition-all duration-500"
             onClick={toggle}
           >
             <MdMenu size={35} />
           </div>
-          <div className=" w-[70%] mt-5 flex ml-2">
+          <div className=" w-[70%] mt-5 flex lg:ml-2">
             <Input
               className=" h-[35px] flex text-[13px] font-medium"
               type="search"
