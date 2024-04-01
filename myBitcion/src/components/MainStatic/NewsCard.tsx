@@ -12,15 +12,18 @@ const NewsCard: React.FC<NewsItem> = ({
 	link,
 }) => {
 	// Function to extract image URL from HTML content
-	const getImageUrl = (htmlContent: string): string | undefined => {
+	const getImageUrl = (
+		htmlContent: string,
+		titleImage: string
+	): string | undefined => {
 		const imgElement = document.createElement("div");
 		imgElement.innerHTML = htmlContent;
 		const img = imgElement.querySelector("img");
-		return img && img.src !== title ? img.src : undefined;
+		return img && img.src !== titleImage ? img.src : undefined;
 	};
 
 	// Extract image URL
-	const imageUrl = getImageUrl(description);
+	const imageUrl = getImageUrl(description, title);
 
 	return (
 		<div className="border p-4 rounded-lg shadow-md bg-white">

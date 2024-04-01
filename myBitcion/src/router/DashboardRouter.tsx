@@ -17,85 +17,85 @@ import Token from "../page/auth/Token";
 import Loading from "../page/Loading";
 
 const DashboardRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <PrivateRouter>
-        <Layout />
-      </PrivateRouter>
-    ),
+	{
+		path: "/",
+		element: (
+			<PrivateRouter>
+				<Layout />
+			</PrivateRouter>
+		),
 
-    children: [
-      {
-        index: true,
-        element: <View />,
-      },
-      {
-        index: true,
-        path: "dashboard",
-        element: <View />,
-      },
-      {
-        index: true,
-        path: "settings",
-        element: <Settings />,
-      },
-      {
-        index: true,
-        path: "wallet",
-        element: <WalletScreen />,
-      },
-      {
-        index: true,
-        path: "transaction",
-        element: <TransactionScreen />,
-      },
-      {
-        index: true,
-        path: "crypto",
-        element: <CryptoScreen />,
-      },
-      {
-        index: true,
-        path: "exchange",
-        element: <ExchangeScreen />,
-      },
-      {
-        index: true,
-        path: "complains",
-        element: <Complains />,
-      },
-    ],
-  },
-  {
-    path: "/auth",
-    element: <AuthLayout />,
-    children: [
-      {
-        index: true,
-        element: <Register />,
-      },
-      {
-        index: true,
-        path: "login",
-        element: <SignIn />,
-      },
-      {
-        index: true,
-        path: "register-message",
-        element: <RegisterCard />,
-      },
-      {
-        index: true,
-        path: "token",
-        element: <Token />,
-      },
-    ],
-  },
-  {
-    path: "*",
-    element: <Loading />,
-  },
+		children: [
+			{
+				index: true,
+				element: <View />,
+			},
+			{
+				index: true,
+				path: "dashboard",
+				element: <View />,
+			},
+			{
+				index: true,
+				path: "settings",
+				element: <Settings />,
+			},
+			{
+				index: true,
+				path: "wallet",
+				element: <WalletScreen />,
+			},
+			{
+				index: true,
+				path: "transaction",
+				element: <TransactionScreen />,
+			},
+			{
+				index: true,
+				path: "crypto",
+				element: <CryptoScreen />,
+			},
+			{
+				index: true,
+				path: "exchange",
+				element: <ExchangeScreen />,
+			},
+			{
+				index: true,
+				path: "complains",
+				element: <Complains />,
+			},
+		],
+	},
+	{
+		path: "/auth",
+		element: <AuthLayout />,
+		children: [
+			{
+				index: true,
+				element: <Register />,
+			},
+			{
+				index: true,
+				path: "login",
+				element: <SignIn />,
+			},
+			{
+				index: true,
+				path: "register-message",
+				element: <RegisterCard />,
+			},
+			{
+				index: true,
+				path: "token",
+				element: <Token />,
+			},
+		],
+	},
+	{
+		path: "*",
+		element: <Loading />,
+	},
 ]);
 
 export default DashboardRouter;
