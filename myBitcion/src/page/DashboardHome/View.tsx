@@ -7,6 +7,7 @@ import litecoinlogo from "../../assets/litecoinlogo.png";
 import ethereumlogo from "../../assets/ethereumlogo.png";
 import axios from "axios";
 import NewsCard from "../../components/MainStatic/NewsCard";
+import ExchangeRate from "../../components/MainStatic/ExchangeRate";
 
 async function createCryptoChart(): Promise<void> {
 	const cryptoData = await fetchCryptoData();
@@ -103,7 +104,7 @@ const CryptoChart: React.FC = () => {
 		const fetchNews = async () => {
 			try {
 				const response = await axios.get(
-					"https://rss.app/feeds/tB7pO8E6Tuor8JAi.xml"
+					"https://rss.app/feeds/t7Edz1wmKcCh6YwF.xml"
 				);
 				const parser = new DOMParser();
 				const xmlDoc = parser.parseFromString(
@@ -154,48 +155,8 @@ const CryptoChart: React.FC = () => {
 		"bg-black",
 	];
 
-	const [amount, setAmount] = useState<string>("");
-	const [sourceCurrency, setSourceCurrency] = useState<string>("BTC");
-	const [targetCurrency, setTargetCurrency] = useState<string>("USD");
-	const [exchangeRates] = useState<ExchangeRates>({
-		BTC: { USD: 47000, EUR: 39000 },
-		ETH: { USD: 1500, EUR: 1200 },
-		// Add more exchange rates as needed
-	});
-
-	const handleAmountChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setAmount(event.target.value);
-	};
-
-	const handleSourceCurrencyChange = (
-		event: React.ChangeEvent<HTMLSelectElement>
-	) => {
-		setSourceCurrency(event.target.value);
-	};
-
-	const handleTargetCurrencyChange = (
-		event: React.ChangeEvent<HTMLSelectElement>
-	) => {
-		setTargetCurrency(event.target.value);
-	};
-
-	const convertCurrency = () => {
-		if (!amount || isNaN(parseFloat(amount))) {
-			alert("Please enter a valid amount.");
-			return;
-		}
-
-		const sourceRate = exchangeRates[sourceCurrency][targetCurrency];
-		const convertedAmount = parseFloat(amount) * sourceRate;
-		alert(
-			`${amount} ${sourceCurrency} equals ${convertedAmount} ${targetCurrency}`
-		);
-	};
-
 	return (
-		<div>
+		<div className="h-[100vh]">
 			<div className=" w-full h-screen grid grid-cols-1 lg:grid-cols-2 gap-4">
 				<div className=" grid grid-cols-2  gap-4">
 					{data.map((crypto, index) => (
@@ -265,57 +226,12 @@ const CryptoChart: React.FC = () => {
 						className=" bg-white rounded-lg shadow-lg w-full h-[400px] lg:h-full"
 					></canvas>
 				</div>
-				<div className=" bg-gray-400">
-					<div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
-						<h2 className="text-2xl font-semibold mb-6 text-center">
-							Cryptocurrency Converter
-						</h2>
-						<div className="mb-4">
-							<label className="block text-sm font-semibold mb-2">
-								Amount:
-							</label>
-							<input
-								type="number"
-								value={amount}
-								onChange={handleAmountChange}
-								className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-							/>
-						</div>
-						<div className="mb-4">
-							<label className="block text-sm font-semibold mb-2">
-								From:
-							</label>
-							<select
-								value={sourceCurrency}
-								onChange={handleSourceCurrencyChange}
-								className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-							>
-								<option value="BTC">BTC</option>
-								<option value="ETH">ETH</option>
-								{/* Add more cryptocurrencies as needed */}
-							</select>
-						</div>
-						<div className="mb-4">
-							<label className="block text-sm font-semibold mb-2">
-								To:
-							</label>
-							<select
-								value={targetCurrency}
-								onChange={handleTargetCurrencyChange}
-								className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-							>
-								<option value="USD">USD</option>
-								<option value="EUR">EUR</option>
-								{/* Add more fiat currencies as needed */}
-							</select>
-						</div>
-						<button
-							onClick={convertCurrency}
-							className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-						>
-							Convert
-						</button>
-					</div>
+
+				<div className="container mx-auto ">
+					<h1 className="text-[15px] font-semibold mb-4">
+						Cryptocurrency Exchange Rate
+					</h1>
+					<ExchangeRate />
 				</div>
 			</div>
 		</div>

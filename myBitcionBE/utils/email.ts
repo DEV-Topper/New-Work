@@ -72,7 +72,7 @@ export const verifiedEmail = async (user: any) => {
 		});
 
 		const mailerOption = {
-			from: "CoinTradeX❤️⛑️🚑 <codelabbest@gmail.com>",
+			from: "CryptoKing❤️ <codelabbest@gmail.com>",
 			to: user.email,
 			subject: "Account Verification",
 			html,

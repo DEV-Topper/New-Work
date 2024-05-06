@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/banner_vector2.png";
+import logo from "../../assets/CryptoKing.png";
 import Button from "../../components/MainReUse/Button";
 
 import { registerUser } from "../api/userAPI";
@@ -15,7 +15,7 @@ const Register = () => {
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const navigate = useNavigate();
-
+	
 	const onHandleSubmit = () => {
 		setLoading(true);
 
@@ -79,10 +79,11 @@ const Register = () => {
 						className="w-[97%]"
 						type="password"
 						value={password}
+						show
+						required
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 							setPassword(e.target.value)
 						}
-						required
 					/>
 				</div>
 

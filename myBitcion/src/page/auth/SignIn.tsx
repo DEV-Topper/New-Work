@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/MainReUse/Input";
 import Button from "../../components/MainReUse/Button";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/CryptoKing.png";
 import { useState } from "react";
 import { loginUser } from "../api/userAPI";
 import toast, { Toaster } from "react-hot-toast";
@@ -52,7 +52,7 @@ const SignIn = () => {
       <div className="rounded-md bg-white min-h-[300px] w-[80%] md:w-[500px] border p-4">
         <Input
           placeholder="Email"
-          className="w-[97%]"
+          className="w-full"
           type="email"
           value={email}
           onChange={(e: any) => {
@@ -60,12 +60,13 @@ const SignIn = () => {
           }}
         />
 
-        <div>
+        <div >
           <Input
             placeholder="Password"
-            className="w-[97%]"
+            className="w-full"
             type="password"
             value={password}
+            show
             onChange={(e: any) => {
               setpassword(e.target.value);
             }}

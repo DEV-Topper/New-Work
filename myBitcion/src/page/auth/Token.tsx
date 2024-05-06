@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/MainReUse/Input";
-import logo from "../../assets/banner_vector2.png";
+import logo from "../../assets/CryptoKing.png";
 import Button from "../../components/MainReUse/Button";
 import { useState } from "react";
 import { verifyUser } from "../api/userAPI";
