@@ -47,6 +47,7 @@ const MakeComplains: FC<iProps> = ({ props }) => {
   return (
     <div>
       {/* <Toaster position="top-center" reverseOrder={true} /> */}
+      <div className="flex justify-center items-center text-[20px] font-semibold">Reporting Issues or Complaints</div>
       <div className=" text-[13px] font-medium">
         <label
           htmlFor="mark_complains"

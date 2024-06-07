@@ -42,7 +42,7 @@ const SignIn = () => {
       <Toaster position="top-center" />
       <div className="mb-10 text-center flex items-center w-full flex-col">
         <Link to="/">
-          <img className="mb-5 w-56 h-28 object-contain" src={logo} />{" "}
+          <a className="btn btn-ghost text-[25px]">CoinTradeX </a>
         </Link>
         <div className="text-[26px] font-bold mb-3">Welcome Back</div>
         <div className="text-[14px] -mt-4">

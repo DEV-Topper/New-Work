@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Chart from "chart.js/auto";
-import { fetchCryptoData } from "../api/bitcoinApi";
+import React, { useEffect, useState, useRef } from "react";
 import bitcoin from "../../assets/bitcoinpic.png";
 import EthereumClassic from "../../assets/EthereumClassic.png";
 import litecoinlogo from "../../assets/litecoinlogo.png";
@@ -8,80 +6,11 @@ import ethereumlogo from "../../assets/ethereumlogo.png";
 import axios from "axios";
 import NewsCard from "../../components/MainStatic/NewsCard";
 import ExchangeRate from "../../components/MainStatic/ExchangeRate";
-
-async function createCryptoChart(): Promise<void> {
-	const cryptoData = await fetchCryptoData();
-	let chart: Chart | null = null;
-	if (cryptoData) {
-		const prices = cryptoData.prices.map((pair) => pair[1]);
-		const timestamps = cryptoData.prices.map((pair) =>
-			new Date(pair[0]).toLocaleDateString()
-		);
-
-		const ctx = document.getElementById(
-			"cryptoChart"
-		) as HTMLCanvasElement | null;
-		if (ctx) {
-			new Chart(ctx, {
-				type: "line",
-				data: {
-					labels: timestamps,
-					datasets: [
-						{
-							label: "Bitcoin Price (USD)",
-							data: prices,
-							fill: false,
-							borderColor: "blue",
-							tension: 0.1,
-						},
-					],
-				},
-				options: {
-					scales: {
-						y: {
-							beginAtZero: false,
-						},
-					},
-					interaction: {
-						mode: "index",
-						// speed: 0,
-					},
-				},
-			});
-		}
-	}
-}
-
-const data = [
-	{
-		name: "LitCoin",
-		price: "$48,200.00",
-		percentage: "+4%",
-		week: "(30 days)",
-		Image: litecoinlogo,
-	},
-	{
-		name: "EthereumClassic",
-		price: "$48,200.00",
-		percentage: "+4%",
-		week: "(20 days)",
-		Image: EthereumClassic,
-	},
-	{
-		name: "Bit Coin",
-		price: "$48,200.00",
-		percentage: "+4%",
-		week: "(50 days)",
-		Image: bitcoin,
-	},
-	{
-		name: "Ethereum",
-		price: "$48,200.00",
-		percentage: "+4%",
-		week: "(30 days)",
-		Image: ethereumlogo,
-	},
-];
+import ViewBitcoin from "../../components/static/ViewBitcoin";
+import ViewEthereum from "../../components/static/ViewEthereum";
+import ViewLitcoin from "../../components/static/ViewLitcoin";
+import ViewDoge from "../../components/static/ViewDoge";
+import ViewBtcAnalysis from "../../components/static/ViewBitcoinAnalysis";
 
 interface NewsItem {
 	title: string;
@@ -89,22 +18,18 @@ interface NewsItem {
 	link: string;
 }
 
-interface ExchangeRates {
-	[crypto: string]: {
-		[fiat: string]: number;
-	};
-}
-
 const CryptoChart: React.FC = () => {
 	document.title = "Dashboard Screen";
 
 	const [news, setNews] = useState<NewsItem[]>([]);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const scriptLoadedRef = useRef(false);
 
 	useEffect(() => {
 		const fetchNews = async () => {
 			try {
 				const response = await axios.get(
-					"https://rss.app/feeds/t7Edz1wmKcCh6YwF.xml"
+					"https://rss.app/feeds/txF6Dc9RY6I2otLn.xml"
 				);
 				const parser = new DOMParser();
 				const xmlDoc = parser.parseFromString(
@@ -132,80 +57,38 @@ const CryptoChart: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		createCryptoChart();
+		if (!scriptLoadedRef.current && containerRef.current) {
+			const script = document.createElement("script");
+			script.src =
+				"https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+			script.type = "text/javascript";
+			script.async = true;
+			script.innerHTML = JSON.stringify({
+				autosize: true,
+				symbol: "BINANCE:BTCUSDT",
+				interval: "D",
+				timezone: "Etc/UTC",
+				theme: "light",
+				style: "1",
+				locale: "en",
+				hide_top_toolbar: true,
+				allow_symbol_change: false,
+				calendar: false,
+				support_host: "https://www.tradingview.com",
+			});
+			containerRef.current.appendChild(script);
+			scriptLoadedRef.current = true;
+		}
 	}, []);
 
-	const bgColors = [
-		"bg-black",
-		"bg-white",
-		"bg-white",
-		"bg-green-300",
-	];
-	const textColors = [
-		"text-white",
-		"text-black",
-		"text-black",
-		"text-black",
-	];
-
-	const lilBgColors = [
-		"bg-white",
-		"bg-black",
-		"bg-green-300",
-		"bg-black",
-	];
-
 	return (
-		<div className="h-[100vh]">
-			<div className=" w-full h-screen grid grid-cols-1 lg:grid-cols-2 gap-4">
-				<div className=" grid grid-cols-2  gap-4">
-					{data.map((crypto, index) => (
-						<div
-							key={index}
-							className={`${bgColors[index % bgColors.length]} ${
-								textColors[index % textColors.length]
-							} justify-center items-center py-2 flex rounded-md border ${
-								index === 1 || index == 2 ? "h-[90%]" : "h-[180px]"
-							}`}
-						>
-							<div className="w-[90%]">
-								<div className="flex items-center mb-3">
-									<div
-										className={`${
-											lilBgColors[index % lilBgColors.length]
-										}
-										h-11 w-11 rounded-md ml-4 justify-center items-center flex `}
-									>
-										<img
-											src={crypto.Image}
-											alt=""
-											className="w-[30px]"
-										/>
-									</div>
-									<div className="ml-2 text-[12px] font-bold">
-										{crypto.name}
-									</div>
-								</div>
-								<div className="">
-									<h3 className="font-bold ml-4">{crypto.price}</h3>
-									{/* <canvas id="cryptoChart"></canvas> */}
-								</div>
-								<div className="flex gap-1 ml-4">
-									<div className="">
-										<span className="text-[12px] font-bold m-1">
-											{crypto.percentage}
-										</span>
-									</div>
-									<div className="">
-										<span className="text-[12px] font-bold">
-											{crypto.week}
-										</span>
-									</div>
-									{/* <LiveCryptoGraph /> */}
-								</div>
-							</div>
-						</div>
-					))}
+		<div className="h-[100%]">
+			<div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 gap-4">
+				<div className="grid grid-cols-2 gap-4 ">
+					<ViewBitcoin containerId="tradingview-widget-container-1" />
+					<ViewEthereum containerId="tradingview-widget-container-2" />
+					<ViewLitcoin containerId="tradingview-widget-container-3" />
+					<ViewDoge containerId="tradingview-widget-container-4" />
 				</div>
 				<div
 					className="overflow-x-hidden overflow-y-auto"
@@ -220,20 +103,14 @@ const CryptoChart: React.FC = () => {
 						/>
 					))}
 				</div>
-				<div className="">
-					<canvas
-						id="cryptoChart"
-						className=" bg-white rounded-lg shadow-lg w-full h-[400px] lg:h-full"
-					></canvas>
-				</div>
-
-				<div className="container mx-auto ">
-					<h1 className="text-[15px] font-semibold mb-4">
-						Cryptocurrency Exchange Rate
-					</h1>
-					<ExchangeRate />
+				<div className="container mx-auto">
+					<ViewBtcAnalysis />
 				</div>
 			</div>
+			<div
+				ref={containerRef}
+				className="mt-96 h-[600px]"
+			></div>
 		</div>
 	);
 };

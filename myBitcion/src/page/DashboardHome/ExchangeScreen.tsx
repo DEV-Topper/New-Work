@@ -1,91 +1,171 @@
-import { useEffect, useState } from "react";
-import { FaBitcoin, FaDashcube, FaEthereum } from "react-icons/fa";
-import { FaLitecoinSign } from "react-icons/fa6";
-import Bitcoin from "./Bitcoin";
-import Ethereum from "./Ethereum";
-import Dash from "./Dash";
-import Litecoin from "./Litecoin";
-// import { fetchEthereumData } from "../api/EthereumApi";
+import React, { useEffect, useRef, memo } from "react";
 
-interface CryptoData {
-  prices: [number, number][];
-}
+const TradingViewWidgets: React.FC = () => {
+	const overviewContainerRef = useRef<HTMLDivElement>(null);
+	const marketQuotesContainerRef = useRef<HTMLDivElement>(null);
+	const scriptLoadedRef = useRef<{
+		overview: boolean;
+		marketQuotes: boolean;
+	}>({
+		overview: false,
+		marketQuotes: false,
+	});
 
-const ExchangeScreen = () => {
-  document.title = "Exchange Screen";
-//   const data = fetchEthereumData();
-//   console.log("this is it:", data);
-  const [state, setState] = useState("");
+	useEffect(() => {
+		if (
+			!scriptLoadedRef.current.overview &&
+			overviewContainerRef.current
+		) {
+			const script = document.createElement("script");
+			script.src =
+				"https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
+			script.type = "text/javascript";
+			script.async = true;
+			script.innerHTML = `
+        {
+          "symbols": [
+            ["BINANCE:BTCUSDT|1D"],
+            ["COINBASE:ETHUSD|1D"],
+            ["BINANCE:LITUSDT|1D"],
+            ["COINBASE:SOLUSD|1D"],
+            ["BINANCE:BNBUSD|1D"],
+            ["COINBASE:DOGEUSD|1D"]
+          ],
+          "chartOnly": false,
+          "width": "100%",
+          "height": "100%",
+          "locale": "en",
+          "colorTheme": "light",
+          "autosize": true,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "area",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineWidth": 2,
+          "lineType": 0,
+          "dateRanges": [
+            "1d|1",
+            "1m|30",
+            "3m|60",
+            "12m|1D",
+            "60m|1W",
+            "all|1M"
+          ]
+        }
+      `;
+			overviewContainerRef.current.appendChild(script);
+			scriptLoadedRef.current.overview = true;
+		}
 
-  useEffect(() => {
-    setState("Bitcoin");
-  }, []);
+		if (
+			!scriptLoadedRef.current.marketQuotes &&
+			marketQuotesContainerRef.current
+		) {
+			const script = document.createElement("script");
+			script.src =
+				"https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js";
+			script.type = "text/javascript";
+			script.async = true;
+			script.innerHTML = `
+        {
+          "width": 550,
+          "height": 550,
+          "symbolsGroups": [
+            {
+              "name": "Indices",
+              "originalName": "Indices",
+              "symbols": [
+                {"name": "FOREXCOM:NSXUSD", "displayName": "US 100 Cash CFD"},
+                {"name": "INDEX:DEU40", "displayName": "DAX Index"},
+                {"name": "FOREXCOM:UKXGBP", "displayName": "FTSE 100 Index"},
+                {"name": "BITSTAMP:BTCUSD"},
+                {"name": "BINANCE:ETHUSDT"},
+                {"name": "BINANCE:BNBUSD"},
+                {"name": "COINBASE:LITUSD"},
+                {"name": "BINANCE:DOGEUSD"},
+                {"name": "BINANCE:XLMUSDT"}
+              ]
+            },
+            {
+              "name": "Futures",
+              "originalName": "Futures",
+              "symbols": [
+                {"name": "CME_MINI:ES1!", "displayName": "S&P 500"},
+                {"name": "CME:6E1!", "displayName": "Euro"},
+                {"name": "COMEX:GC1!", "displayName": "Gold"},
+                {"name": "NYMEX:CL1!", "displayName": "WTI Crude Oil"},
+                {"name": "NYMEX:NG1!", "displayName": "Gas"},
+                {"name": "CBOT:ZC1!", "displayName": "Corn"}
+              ]
+            },
+            {
+              "name": "Bonds",
+              "originalName": "Bonds",
+              "symbols": [
+                {"name": "CBOT:ZB1!", "displayName": "T-Bond"},
+                {"name": "CBOT:UB1!", "displayName": "Ultra T-Bond"},
+                {"name": "EUREX:FGBL1!", "displayName": "Euro Bund"},
+                {"name": "EUREX:FBTP1!", "displayName": "Euro BTP"},
+                {"name": "EUREX:FGBM1!", "displayName": "Euro BOBL"}
+              ]
+            },
+            {
+              "name": "Forex",
+              "originalName": "Forex",
+              "symbols": [
+                {"name": "FX:EURUSD", "displayName": "EUR to USD"},
+                {"name": "FX:GBPUSD", "displayName": "GBP to USD"},
+                {"name": "FX:USDJPY", "displayName": "USD to JPY"},
+                {"name": "FX:USDCHF", "displayName": "USD to CHF"},
+                {"name": "FX:AUDUSD", "displayName": "AUD to USD"},
+                {"name": "FX:USDCAD", "displayName": "USD to CAD"}
+              ]
+            }
+          ],
+          "showSymbolLogo": true,
+          "isTransparent": false,
+          "colorTheme": "light",
+          "locale": "en",
+          "backgroundColor": "#ffffff"
+        }
+      `;
+			marketQuotesContainerRef.current.appendChild(script);
+			scriptLoadedRef.current.marketQuotes = true;
+		}
+	}, []);
 
-  const handleState = (coin: any) => {
-    setState(coin);
-  };
-  const [ethereumData, setEthereumData] = useState<CryptoData | null>(null);
+	return (
+		<div>
+			<div
+				className="tradingview-widget-container h-[600px]"
+				ref={overviewContainerRef}
+				// style={{ height: "600px" }}
+			>
+				<div className="tradingview-widget-container__widget"></div>
+				<div className="tradingview-widget-copyright"></div>
+			</div>
 
-  useEffect(() => {
-    const fetchData = async () => {
-    //   const data = await fetchEthereumData();
-    //   setEthereumData(data);
-    };
-
-    fetchData();
-  }, []);
-  // console.log(ethereumData);
-
-  return (
-    <>
-      <div className="w-full min-h-[50px] border mb-5 flex flex-col md:flex-row justify-between items-center">
-        <div className="font-bold text-lg mb-2 md:mb-0">Coin Details</div>
-        <div className="grid grid-cols-4 gap-2 overflow-x-scroll md:overflow-x-hidden">
-          <div
-            className={`font-bold grid item-center justify-center py-2 px-3 gap-2 rounded-lg cursor-pointer ${
-              state === "Bitcoin" ? "bg-[#bfdbfe]" : ""
-            }`}
-            onClick={() => handleState("Bitcoin")}
-          >
-            <FaBitcoin size={20} />
-            <button className="hidden md:block">Bitcoin</button>
-          </div>
-          <div
-            className={`font-bold grid item-center justify-center py-2 px-3 rounded-lg gap-2 cursor-pointer ${
-              state === "Ethereum" ? "bg-[#bfdbfe]" : ""
-            }`}
-            onClick={() => handleState("Ethereum")}
-          >
-            <FaEthereum size={20} />
-            <button className="hidden md:block">Ethereum</button>
-          </div>
-          <div
-            className={`font-bold grid item-center justify-center gap-2 py-2 px-2 rounded-lg cursor-pointer ${
-              state === "Dash" ? "bg-[#bfdbfe]" : ""
-            }`}
-            onClick={() => handleState("Dash")}
-          >
-            <FaDashcube size={20} />
-            <button className="hidden md:block">Dash</button>
-          </div>
-          <div
-            className={`font-bold grid item-center justify-center py-2 px-3 rounded-lg gap-2 cursor-pointer ${
-              state === "Litecoin" ? "bg-[#bfdbfe]" : ""
-            }`}
-            onClick={() => handleState("Litecoin")}
-          >
-            <FaLitecoinSign size={20} />
-            <button className="hidden md:block">Lite coin</button>
-          </div>
-        </div>
-      </div>
-
-      {state === "Bitcoin" && <Bitcoin />}
-      {state === "Ethereum" && <Ethereum />}
-      {state === "Dash" && <Dash />}
-      {state === "Litecoin" && <Litecoin />}
-    </>
-  );
+			<div
+				className="tradingview-widget-container mt-11"
+				ref={marketQuotesContainerRef}
+			>
+				<div className="tradingview-widget-container__widget"></div>
+				{/* <div className="tradingview-widget-copyright"></div> */}
+			</div>
+		</div>
+	);
 };
 
-export default ExchangeScreen;
+export default TradingViewWidgets;

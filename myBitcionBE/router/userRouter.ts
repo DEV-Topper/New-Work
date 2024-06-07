@@ -1,11 +1,11 @@
 import { Router } from "express";
 import {
-  VerifyUser,
-  createUser,
-  getAllUsers,
-  getCookieUser,
-  logOutUser,
-  signInUser,
+	VerifyUser,
+	createUser,
+	getAllUsers,
+	getCookieUser,
+	logOutUser,
+	signInUser,
 } from "../controller/userController";
 
 const router: Router = Router();
