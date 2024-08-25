@@ -50,3 +50,37 @@ export const readUserCookie = async () => {
 		return error;
 	}
 };
+
+export const readUser = async (userID: string) => {
+	try {
+		return await axios
+			.get(`${URL}/view-user/${userID}`)
+			.then((res: any) => {
+				return res?.data;
+			});
+	} catch (error) {
+		return error;
+	}
+};
+
+export const getUserLandingPage = async (userName: string) => {
+	try {
+		return await axios.get(`${URL}/${userName}`).then((res: any) => {
+			return res?.data;
+		});
+	} catch (error: any) {
+		return error;
+	}
+};
+
+export const viewUserByName = async (userName: string) => {
+	try {
+		return await axios
+			.get(`${URL}/get-school-by-name/${userName}`)
+			.then((res: any) => {
+				return res?.data;
+			});
+	} catch (error) {
+		return error;
+	}
+};

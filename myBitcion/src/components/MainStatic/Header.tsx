@@ -1,32 +1,30 @@
-import {
-	FaCoins,
-	FaExchangeAlt,
-	FaRegBell,
-	FaSearch,
-	FaWallet,
-} from "react-icons/fa";
+import { FaRegBell, FaSearch } from "react-icons/fa";
 import Input from "../MainReUse/Input";
-import {
-	MdDashboard,
-	MdForwardToInbox,
-	MdReport,
-	MdSettings,
-	MdTransferWithinAStation,
-	// MdOutlineNotifications,
-} from "react-icons/md";
+import { MdForwardToInbox } from "react-icons/md";
 import pic from "../../assets/Dog.png";
 import { useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import MobileScreen from "./MobileScreen";
+import {
+	useUserCookie,
+	useUserDataByName,
+} from "../../hooks/userHooks";
 
 const Header = () => {
 	const [search, setSearch] = useState<string>("");
 	const [menu, setMenu] = useState(false);
+	const { data: userCookie, isLoading: isUserCookieLoading } =
+		useUserCookie();
+	const userName = userCookie?.userName;
+
+	const { data: userInfo, isLoading: isUserInfoLoading } =
+		useUserDataByName(userName);
 
 	const toggle = () => {
 		setMenu(!menu);
 	};
+
 	return (
 		<div className="h-[50px] border-b w-full flex justify-center items-center z-10 fixed top-0 left-0 right-0 bg-white mt-11">
 			<div className="w-full relative flex justify-between items-center">
@@ -57,7 +55,7 @@ const Header = () => {
 						/>
 					</div>
 				</div>
-				<div className="flex  items-center mr-16 min-md:block">
+				<div className="flex items-center mr-16 min-md:block">
 					<div className=" hidden md:flex mr-5">
 						<MdForwardToInbox
 							className="mr-4"
@@ -65,10 +63,9 @@ const Header = () => {
 							size={20}
 						/>
 						<FaRegBell cursor="pointer" />
-						{/* <MdOutlineNotifications /> */}
 					</div>
 					<div className="w-[1px] border h-6 mr-4"></div>
-					<div className="flex ">
+					<div className="flex">
 						<div className=" w-9 h-9 object-cover flex border rounded-full items-center justify-center cursor-pointer">
 							<img
 								className="w-full h-full object-cover rounded-full border"
@@ -76,8 +73,16 @@ const Header = () => {
 							/>
 						</div>
 						<div className="ml-2">
-							<h1 className="font-bold text-[13px]">R.Ahmed</h1>
-							<h3 className="text-[13px]">Admin</h3>
+							{isUserInfoLoading ? (
+								<h1 className="font-bold text-[13px]">Loading...</h1>
+							) : (
+								<>
+									<h1 className="font-bold text-[13px]">
+										{userInfo?.userName}
+									</h1>
+									<h3 className="text-[13px]">Admin</h3>
+								</>
+							)}
 						</div>
 					</div>
 				</div>

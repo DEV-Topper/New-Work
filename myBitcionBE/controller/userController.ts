@@ -195,3 +195,45 @@ export const getCookieUser = async (req: any, res: Response) => {
 		});
 	}
 };
+
+export const viewUserStatus = async (
+	req: Request,
+	res: Response
+): Promise<Response> => {
+	try {
+		const { userID } = req.params;
+
+		const user = await userModel.findById(userID);
+
+		return res.status(200).json({
+			message: "viewing user record",
+			data: user,
+			status: 200,
+		});
+	} catch (error) {
+		return res.status(404).json({
+			message: "Error verifying user",
+		});
+	}
+};
+
+export const viewUserStatusByName = async (
+	req: Request,
+	res: Response
+): Promise<Response> => {
+	try {
+		const { userName } = req.params;
+
+		const user = await userModel.findOne({ userName });
+
+		return res.status(200).json({
+			message: "viewing user record by her name",
+			data: user,
+			status: 200,
+		});
+	} catch (error) {
+		return res.status(404).json({
+			message: "Error verifying user",
+		});
+	}
+};

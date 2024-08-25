@@ -15,7 +15,7 @@ const Register = () => {
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const navigate = useNavigate();
-	
+
 	const onHandleSubmit = () => {
 		setLoading(true);
 
